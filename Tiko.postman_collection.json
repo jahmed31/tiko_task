@@ -1,0 +1,413 @@
+{
+	"info": {
+		"_postman_id": "6804a11e-1df7-4592-af6c-b0ebdc4be8fa",
+		"name": "Tiko",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "432490"
+	},
+	"item": [
+		{
+			"name": "Login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);",
+							"var access_token = jsonData[\"access\"]",
+							"var refresh_token = jsonData[\"refresh\"]",
+							"pm.environment.set(\"token\", access_token);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "email",
+							"value": "test@test.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "pakistan123",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{django_server}}/login/",
+					"host": [
+						"{{django_server}}"
+					],
+					"path": [
+						"login",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Refresh Token",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "refresh",
+							"value": "{{refresh_token}}",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{django_server}}/token/refresh/",
+					"host": [
+						"{{django_server}}"
+					],
+					"path": [
+						"token",
+						"refresh",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Register User",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "email",
+							"value": "test6@test.com",
+							"type": "text"
+						},
+						{
+							"key": "first_name",
+							"value": "j6",
+							"type": "text"
+						},
+						{
+							"key": "last_name",
+							"value": "a6",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "pakistan123",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{django_server}}/user/register/",
+					"host": [
+						"{{django_server}}"
+					],
+					"path": [
+						"user",
+						"register",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Event",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "test_event1",
+							"type": "text"
+						},
+						{
+							"key": "description",
+							"value": "some_event1",
+							"type": "text"
+						},
+						{
+							"key": "start_date",
+							"value": "01-09-2024",
+							"type": "text"
+						},
+						{
+							"key": "end_date",
+							"value": "02-09-2024",
+							"type": "text"
+						},
+						{
+							"key": "owner",
+							"value": "2",
+							"type": "text"
+						},
+						{
+							"key": "attendees[0]",
+							"value": "2",
+							"type": "text"
+						},
+						{
+							"key": "attendees[1]",
+							"value": "3",
+							"type": "text"
+						},
+						{
+							"key": "attendees[2]",
+							"value": "4",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{django_server}}/event/create/",
+					"host": [
+						"{{django_server}}"
+					],
+					"path": [
+						"event",
+						"create",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "User Events",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{django_server}}/event/user/",
+					"host": [
+						"{{django_server}}"
+					],
+					"path": [
+						"event",
+						"user",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "All Events",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{django_server}}/event/all/",
+					"host": [
+						"{{django_server}}"
+					],
+					"path": [
+						"event",
+						"all",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Register Event",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{django_server}}/event/register/3/",
+					"host": [
+						"{{django_server}}"
+					],
+					"path": [
+						"event",
+						"register",
+						"3",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Unregister Event",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{django_server}}/event/unregister/3/",
+					"host": [
+						"{{django_server}}"
+					],
+					"path": [
+						"event",
+						"unregister",
+						"3",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Event",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "test_event3",
+							"type": "text"
+						},
+						{
+							"key": "description",
+							"value": "some_event3",
+							"type": "text"
+						},
+						{
+							"key": "start_date",
+							"value": "01-09-2024",
+							"type": "text"
+						},
+						{
+							"key": "end_date",
+							"value": "02-09-2024",
+							"type": "text"
+						},
+						{
+							"key": "owner",
+							"value": "3",
+							"type": "text"
+						},
+						{
+							"key": "attendees[0]",
+							"value": "2",
+							"type": "text"
+						},
+						{
+							"key": "attendees[1]",
+							"value": "3",
+							"type": "text"
+						},
+						{
+							"key": "attendees[2]",
+							"value": "44",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{django_server}}/event/update/3/",
+					"host": [
+						"{{django_server}}"
+					],
+					"path": [
+						"event",
+						"update",
+						"3",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
