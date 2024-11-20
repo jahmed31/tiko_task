@@ -1,4 +1,4 @@
-# Tiko Test
+# Tiko Task
 
 Tiko Test is a Django-based project designed to manage events and user profiles.
 
